@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import tasksRouter from './api/tasks';
 import usersRouter from './api/users';
+import authenticate from './authenticate';
 
 
 dotenv.config();
@@ -29,7 +30,8 @@ app.use(express.static('public'));
 
 app.use(express.json());
 
-app.use('/api/tasks', tasksRouter);
+
+app.use('/api/tasks', authenticate, tasksRouter);
 
 app.use(errHandler);
 
